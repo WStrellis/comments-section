@@ -1,0 +1,19 @@
+{
+  "name": "comments-section",
+  "version": "1.0.0",
+  "description": "This is GraphQL, React, and MongoDB to create a comments section.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/WStrellis/comments-section.git"
+  },
+  "author": "Westley Strellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WStrellis/comments-section/issues"
+  },
+  "homepage": "https://github.com/WStrellis/comments-section#readme"
+}
