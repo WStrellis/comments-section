@@ -1,0 +1,25 @@
+type User {
+    id: ID!
+    name: String
+    comments: [Comment]!
+    replies: [Reply]!
+}
+
+type Thread {
+    id: ID!
+    title: String!
+    comments: [Comment]!
+}
+
+type Comment {
+    id: ID!
+    user: ID!
+    text: String!
+    replies: [Reply]!
+}
+
+type Reply {
+    id: ID!
+    user: ID!
+    text: String!
+}

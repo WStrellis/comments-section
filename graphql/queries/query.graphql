@@ -1,0 +1,6 @@
+# import User Thread Comment Reply from '../../schema.graphql'
+
+type Query {
+    thread(id: ID!): Thread
+    user(id: ID!): User
+}

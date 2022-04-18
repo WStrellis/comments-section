@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "This is GraphQL, React, and MongoDB to create a comments section.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write \"./graphql/resolvers/*.{js,jsx,ts,tsx}\" \"./index.js\" \"./graphql/**/*.graphql\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,18 @@
   "bugs": {
     "url": "https://github.com/WStrellis/comments-section/issues"
   },
-  "homepage": "https://github.com/WStrellis/comments-section#readme"
+  "homepage": "https://github.com/WStrellis/comments-section#readme",
+  "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.3.10",
+    "@graphql-tools/load": "^7.5.9",
+    "@graphql-tools/schema": "^8.3.9",
+    "@graphql-yoga/node": "^2.3.0",
+    "express": "^4.17.3",
+    "graphql": "^16.3.0"
+  },
+  "devDependencies": {
+    "graphql-config": "^4.3.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2"
+  }
 }
