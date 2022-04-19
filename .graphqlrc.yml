@@ -1,3 +1,2 @@
 ---
 schema: './graphql/schema.graphql'
-documents: ['./graphql/mutatations/graphql','./graphql/queries/graphql']

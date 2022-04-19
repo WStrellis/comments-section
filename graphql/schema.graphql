@@ -23,3 +23,12 @@ type Reply {
     user: ID!
     text: String!
 }
+
+type Query{
+    thread(id: ID!): Thread
+    user(id: ID!): User
+}
+
+type Mutation{
+    addUser(name: String!): ID!
+}
