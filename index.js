@@ -1,22 +1,22 @@
 import { join } from "path"
 import { loadSchemaSync } from "@graphql-tools/load"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
-import { addResolversToSchema } from "@graphql-tools/schema"
+//import { addResolversToSchema } from "@graphql-tools/schema"
 import { createServer } from "@graphql-yoga/node"
-import resolvers from "./graphql/resolvers"
 
-import * as express from "express"
+import express from "express"
 
-const schema = loadSchemaSync(join(__dirname, "./graphql/schema.graphql"), {
+const schema = loadSchemaSync(join("graphql","schema.graphql"), {
     loaders: [new GraphQLFileLoader()],
 })
 
-const schemaWithResolvers = addResolversToSchema({ schema, resolvers })
+// const schemaWithResolvers = addResolversToSchema({ schema, resolvers })
 
 const app = express()
 
 const yoga = createServer({
-    schema: schemaWithResolvers,
+    schema,
+    // schema: schemaWithResolvers,
     graphiql: true,
 })
 
