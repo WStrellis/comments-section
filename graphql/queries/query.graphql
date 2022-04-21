@@ -1,5 +1,0 @@
-
-type Query {
-    thread(id: ID!): Thread
-    user(id: ID!): User
-}

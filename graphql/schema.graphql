@@ -1,8 +1,6 @@
 type User {
     id: ID!
     name: String
-    comments: [Comment]!
-    replies: [Reply]!
 }
 
 type Thread {
