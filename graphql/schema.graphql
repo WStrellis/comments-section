@@ -22,11 +22,24 @@ type Reply {
     text: String!
 }
 
+interface MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+}
+
+type addUserResponse implements MutationResponse{
+    code: String!
+    success: Boolean!
+    message: String!
+    user: User
+}
+
 type Query{
     thread(id: ID!): Thread
     user(id: ID!): User
 }
 
 type Mutation{
-    addUser(name: String!): ID!
+    addUser(name: String!): addUserResponse!
 }
