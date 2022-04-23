@@ -10,7 +10,7 @@ import express from "express"
 import resolvers from "./graphql/resolvers/index.js"
 import db from "./db/data.js"
 
-const schema = loadSchemaSync(join("src","graphql", "schema.graphql"), {
+const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
     loaders: [new GraphQLFileLoader()],
 })
 
