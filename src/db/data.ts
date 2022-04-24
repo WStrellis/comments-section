@@ -1,10 +1,10 @@
-const users = [
+const users: CS.User[] = [
     { id: 0, name: "Leonard" },
     { id: 1, name: "Martha" },
     { id: 2, name: "Elton" },
 ]
 
-const threads = [
+const threads : any[] = [
     {
         id: 0,
         title: "The Perilous Life of a Chicken",

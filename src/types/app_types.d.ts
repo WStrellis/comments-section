@@ -7,7 +7,7 @@ declare global {
         }
 
         interface User {
-            id: string
+            id: number
             name: string
         }
 
@@ -15,6 +15,7 @@ declare global {
             user: User
         }
     }
+
 }
 export {}
 /* alternative:
