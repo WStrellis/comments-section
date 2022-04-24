@@ -1,5 +1,11 @@
+// import type { CommentsSection } from "../../types/app_types"
+
 export default {
-    addUser: (_, { name }, ctx) => {
+    addUser: (
+        _: any,
+        { name }: { name: string },
+        ctx: any,
+    ): CS.AddUserResponse => {
         const newUser = { id: ctx.db.users.length + 1, name }
         ctx.db.users.push(newUser)
         return {

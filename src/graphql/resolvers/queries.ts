@@ -1,5 +1,5 @@
 export default {
-    users: (parent, _, ctx) => {
+    users: (parent: any, _, ctx) => {
         return {
             code: 200,
             success: true,

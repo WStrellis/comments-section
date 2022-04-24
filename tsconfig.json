@@ -7,11 +7,12 @@
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "noImplicitReturns": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "sourceMap": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["./node_modules/@types","./src/types"]
   },
   "ts-node": {
       "esm": true
