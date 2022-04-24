@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-  "module":"es6",
-  "esModuleInterop": true,
-  "target": "es6",
-  "moduleResolution": "Node",
-  "noImplicitReturns": true,
-  "removeComments": true,
-  "preserveConstEnums": true,
-  "noFallthroughCasesInSwitch": true
+    "module":"es6",
+    "target": "es6",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "noFallthroughCasesInSwitch": true
   },
   "ts-node": {
       "esm": true
@@ -16,6 +20,6 @@
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts","**/*.test.ts"],
   "lib":[
-"es6"
+    "es6"
   ]
 }
