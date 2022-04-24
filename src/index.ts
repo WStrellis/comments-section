@@ -4,11 +4,22 @@ import { ApolloServerPluginDrainHttpServer } from "apollo-server-core"
 import http from "http"
 import { loadSchemaSync } from "@graphql-tools/load"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
-//import { addResolversToSchema } from "@graphql-tools/schema"
 import express from "express"
 
 import resolvers from "./graphql/resolvers/index.js"
 import db from "./db/data.js"
+/*
+const  {join}  = require( 'path')
+const { ApolloServer } = require("apollo-server-express")
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core"
+import http from "http"
+import { loadSchemaSync } from "@graphql-tools/load"
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
+import express from "express"
+
+import resolvers from "./graphql/resolvers/index.js"
+import db from "./db/data.js"
+*/
 
 const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
     loaders: [new GraphQLFileLoader()],
@@ -16,9 +27,10 @@ const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
 
 // const schemaWithResolvers = addResolversToSchema({ schema, resolvers })
 
-const PORT = process.env.HTTP_PORT || 3000
+const PORT = Number(process.env.HTTP_PORT) || 3000
 
-async function startApollo(typeDefs, resolvers) {
+// TODO: set correct parameter types
+async function startApollo(typeDefs:any, resolvers:any) : Promise<void>{
     const app = express()
     const httpServer = http.createServer(app)
     const server = new ApolloServer({
