@@ -1,3 +1,4 @@
+import type {Resolvers} from '../../../types'
 
 export default {
     addUser: (

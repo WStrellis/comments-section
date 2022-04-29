@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon --watch 'src/**/*.{js,ts}' --ignore 'src/**/*.test.{ts,js}' --exec 'node --loader ts-node/esm --experimental-specifier-resolution=node src/index.ts'",
-    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,graphql,html,json}\""
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,graphql,html,json}\"",
+    "generate": "graphql-codegen"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,9 @@
     "graphql": "^16.3.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.4.8",
+    "@graphql-codegen/typescript-resolvers": "^2.6.1",
     "@tsconfig/node14": "^1.0.1",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.25",
