@@ -1,7 +1,8 @@
+import type { Query, QueryUsersResponse} from '../../../types'
+
 export default {
-    users: (parent: any, _:any, ctx:any)  => {
+    users: (parent: any, _:any, ctx:any): QueryUsersResponse  => {
         return {
-            code: 200,
             success: true,
             message: "ok",
             users: [...ctx.db.users],

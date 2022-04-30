@@ -1,3 +1,4 @@
+/*
 declare global {
     declare namespace CS {
         interface APIResponse {
@@ -18,6 +19,8 @@ declare global {
 
 }
 export {}
+*/
+
 /* alternative:
 export = { CS }
 useage:

@@ -6,7 +6,7 @@ import { loadSchemaSync } from "@graphql-tools/load"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
 import express from "express"
 
-import Mutations from "./graphql/resolvers/mutations.js"
+import Mutation from "./graphql/resolvers/mutations.js"
 import Query from "./graphql/resolvers/queries.js"
 import db from "./db/data.js"
 import { GraphQLSchema } from "graphql"
@@ -19,7 +19,7 @@ const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
 const PORT = Number(process.env.HTTP_PORT) || 3000
 
 const resolvers : Resolvers = {
-    Mutations,
+    Mutation,
     Query
 }
 

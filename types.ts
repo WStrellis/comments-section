@@ -16,7 +16,6 @@ export type Scalars = {
 
 export type AddUserResponse = Response & {
   __typename?: 'AddUserResponse';
-  code: Scalars['String'];
   message: Scalars['String'];
   success: Scalars['Boolean'];
   user?: Maybe<User>;
@@ -59,7 +58,6 @@ export type QueryUserArgs = {
 
 export type QueryUsersResponse = Response & {
   __typename?: 'QueryUsersResponse';
-  code: Scalars['String'];
   message: Scalars['String'];
   success: Scalars['Boolean'];
   users: Array<Maybe<User>>;
@@ -73,7 +71,6 @@ export type Reply = {
 };
 
 export type Response = {
-  code: Scalars['String'];
   message: Scalars['String'];
   success: Scalars['Boolean'];
 };
@@ -191,7 +188,6 @@ export type ResolversParentTypes = {
 };
 
 export type AddUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AddUserResponse'] = ResolversParentTypes['AddUserResponse']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
@@ -217,7 +213,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type QueryUsersResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['QueryUsersResponse'] = ResolversParentTypes['QueryUsersResponse']> = {
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
@@ -233,7 +228,6 @@ export type ReplyResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Response'] = ResolversParentTypes['Response']> = {
   __resolveType: TypeResolveFn<'AddUserResponse' | 'QueryUsersResponse', ParentType, ContextType>;
-  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
