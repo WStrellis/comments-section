@@ -10,7 +10,7 @@ import Mutation from "./graphql/resolvers/mutations.js"
 import Query from "./graphql/resolvers/queries.js"
 import db from "./db/data.js"
 import { GraphQLSchema } from "graphql"
-import type {Resolvers} from '../types'
+import type {Resolvers} from './types/index'
 
 const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
     loaders: [new GraphQLFileLoader()],

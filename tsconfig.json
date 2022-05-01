@@ -8,11 +8,12 @@
     "moduleResolution": "Node",
     "noImplicitReturns": true,
     "noImplicitAny": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "removeComments": true,
     "preserveConstEnums": true,
     "noFallthroughCasesInSwitch": true,
-    "typeRoots": ["./node_modules/@types","./src/types"]
+    "typeRoots": ["./node_modules/@types","./src/types"],
+    "outDir": "dist"
   },
   "ts-node": {
       "esm": true

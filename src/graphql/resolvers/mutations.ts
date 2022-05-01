@@ -1,4 +1,4 @@
-import type { User, AddUserResponse} from '../../../types'
+import type { User, AddUserResponse} from '../../types/index'
 
 export default {
     addUser: (

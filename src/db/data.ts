@@ -1,7 +1,8 @@
-const users: CS.User[] = [
-    { id: 0, name: "Leonard" },
-    { id: 1, name: "Martha" },
-    { id: 2, name: "Elton" },
+import { User } from "../types/index"
+const users: User[] = [
+    { id: "0", name: "Leonard" },
+    { id: "1", name: "Martha" },
+    { id: "2", name: "Elton" },
 ]
 
 const threads : any[] = [
