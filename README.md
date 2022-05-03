@@ -1,5 +1,12 @@
 # Comments Section App
 
-This is GraphQL, React, and MongoDB to create a comments section.
+This is a GraphQL, React, Typesccript, and MongoDB project to create a website comments section.
 
-# import User Thread Comment Reply from '../../schema.graphql'
+- Bind mount the project files that change to the container
+- Use Nodemon to run the app
+- Store `node_modules` in an anonymous volume
+
+Start with:
+```
+dk run -d -p 3000:80 --rm -v ./dist:/srv:ro -v /srv/node_modules comments_section:latest
+```
