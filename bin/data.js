@@ -1,11 +1,10 @@
-import { User } from "../types/index"
-const users: User[] = [
-    { id: "0", name: "Leonard" },
-    { id: "1", name: "Martha" },
-    { id: "2", name: "Elton" },
+export const users = [
+    { name: "Leonard" },
+    { name: "Martha" },
+    { name: "Elton" },
 ]
 
-const threads : any[] = [
+export const threads  = [
     {
         id: 0,
         title: "The Perilous Life of a Chicken",
@@ -54,4 +53,3 @@ const threads : any[] = [
     },
 ]
 
-export default { users, threads }
