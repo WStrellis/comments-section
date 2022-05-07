@@ -1,7 +1,6 @@
 export const users = [
     { name: "Leonard" },
     { name: "Martha" },
-    { name: "Elton" },
 ]
 
 export const threads  = [
@@ -46,7 +45,7 @@ export const threads  = [
             },
             {
                 id: 1,
-                user: 2,
+                user: 0,
                 text: "Great article. I could plug my vacuum in and turn it on but didn't know what to do after. After reading this article I am able to move the vacuum back and forth over the floor.",
             },
         ],

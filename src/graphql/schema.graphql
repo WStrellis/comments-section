@@ -10,16 +10,16 @@ type Thread {
 }
 
 type Comment {
-    id: ID!
     user: ID!
     text: String!
     replies: [Reply]!
+    time: String!
 }
 
 type Reply {
-    id: ID!
     user: ID!
     text: String!
+    time: String!
 }
 
 interface Response {
