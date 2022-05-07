@@ -1,9 +1,6 @@
-export const users = [
-    { name: "Leonard" },
-    { name: "Martha" },
-]
+export const users = [{ name: "Leonard" }, { name: "Martha" }]
 
-export const threads  = [
+export const threads = [
     {
         id: 0,
         title: "The Perilous Life of a Chicken",
@@ -51,4 +48,3 @@ export const threads  = [
         ],
     },
 ]
-
