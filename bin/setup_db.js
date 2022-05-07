@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb"
 import dotenv from "dotenv"
 
 import { cleanDB } from "./clean_db.js"
-import { createUsers } from "./seed_db.js"
+import { createUsersCollection, seedCollections } from "./seed_db.js"
 
 dotenv.config()
 
@@ -10,7 +10,7 @@ const username = process.env.MONGO_INITDB_ROOT_USERNAME
 const password = process.env.MONGO_INITDB_ROOT_PASSWORD
 const mongoHost = process.env.MONGO_HOST || "localhost"
 
-const commands = ["clean", "seed"]
+const commands = ["clean", "seed", "create"]
 
 // Connection URL
 const url = `mongodb://${username}:${password}@${mongoHost}:27017/?authMechanism=DEFAULT`
@@ -40,7 +40,15 @@ async function main() {
 
         // seed
         case commands[1]:
-            await createUsers(db)
+            await cleanDB(db)
+            await createUsersCollection(db)
+            await seedCollections(db)
+            break
+
+        // create
+        case commands[2]:
+            await cleanDB(db)
+            await createUsersCollection(db)
             break
 
         default:
