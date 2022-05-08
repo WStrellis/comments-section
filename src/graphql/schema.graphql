@@ -13,13 +13,13 @@ type Comment {
     user: ID!
     text: String!
     replies: [Reply]!
-    time: String!
+    timestamp: Int!
 }
 
 type Reply {
     user: ID!
     text: String!
-    time: String!
+    timestamp: Int!
 }
 
 interface Response {

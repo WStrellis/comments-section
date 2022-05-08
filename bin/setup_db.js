@@ -2,7 +2,8 @@ import { MongoClient } from "mongodb"
 import dotenv from "dotenv"
 
 import { cleanDB } from "./clean_db.js"
-import { createUsersCollection, seedCollections } from "./seed_db.js"
+import { seedCollections } from "./seed_db.js"
+import { createUsersCollection, createThreadsCollection } from "./create_db.js"
 
 dotenv.config()
 
@@ -42,13 +43,15 @@ async function main() {
         case commands[1]:
             await cleanDB(db)
             await createUsersCollection(db)
+            await createThreadsCollection(db)
             await seedCollections(db)
             break
 
         // create
         case commands[2]:
-            await cleanDB(db)
+            // await cleanDB(db)
             await createUsersCollection(db)
+            await createThreadsCollection(db)
             break
 
         default:
