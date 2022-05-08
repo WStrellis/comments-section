@@ -14,10 +14,10 @@ export async function seedCollections(db) {
 
     const threadsCollection = db.collection("threads")
     //make thread array
-    const newThreads = createthreads(leonard,martha)
+    const newThreads = createthreads(leonard, martha)
     // add threads
-    const  threadResult = await threadsCollection.insertMany(newThreads)
-    console.log("threadResult",threadResult)
+    const threadResult = await threadsCollection.insertMany(newThreads)
+    console.log("threadResult", threadResult)
     // const findResult = await db.users.find()
     // await findResult.forEach(console.dir)
     return

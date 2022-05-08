@@ -21,7 +21,7 @@ export async function createUsersCollection(db) {
 
     // enforce unique values for the "name" field
     usersCollection.createIndex({ name: 1 }, { unique: true })
-    console.log("created collection \'users\'")
+    console.log("created collection 'users'")
     return
 }
 
@@ -45,7 +45,7 @@ export async function createThreadsCollection(db) {
                         items: {
                             bsonType: ["object"],
                             additionalProperties: false,
-                            required: ["user", "text", "timestamp"],
+                            required: ["user", "text", "timestamp", "replies"],
                             properties: {
                                 user: {
                                     bsonType: "objectId",
@@ -57,6 +57,28 @@ export async function createThreadsCollection(db) {
                                 timestamp: {
                                     bsonType: "date",
                                 },
+                                replies: {
+                                    bsonType: ["array"],
+                                    additionalProperties: false,
+                                    items: {
+                                        bsonType: ["object"],
+                                        additionalProperties: false,
+                                        required: ["user", "text", "timestamp"],
+                                        properties: {
+                                            user: {
+                                                bsonType: "objectId",
+                                                description:
+                                                    "user that posted reply",
+                                            },
+                                            text: {
+                                                bsonType: "string",
+                                            },
+                                            timestamp: {
+                                                bsonType: "date",
+                                            },
+                                        },
+                                    },
+                                },
                             },
                         },
                     },
@@ -67,7 +89,7 @@ export async function createThreadsCollection(db) {
     })
 
     threadsCollection.createIndex({ title: 1 }, { unique: true })
-    console.log("created collection \'threads\'")
+    console.log("created collection 'threads'")
 
     return
 }
