@@ -18,7 +18,6 @@ export async function seedCollections(db) {
     // add threads
     const threadResult = await threadsCollection.insertMany(newThreads)
     console.log("threadResult", threadResult)
-    // const findResult = await db.users.find()
-    // await findResult.forEach(console.dir)
+
     return
 }

@@ -49,7 +49,7 @@ async function main() {
 
         // create
         case commands[2]:
-            // await cleanDB(db)
+            await cleanDB(db)
             await createUsersCollection(db)
             await createThreadsCollection(db)
             break
@@ -57,7 +57,6 @@ async function main() {
         default:
             break
     }
-
     return
 }
 

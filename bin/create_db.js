@@ -20,7 +20,7 @@ export async function createUsersCollection(db) {
     })
 
     // enforce unique values for the "name" field
-    usersCollection.createIndex({ name: 1 }, { unique: true })
+    await usersCollection.createIndex({ name: 1 }, { unique: true })
     console.log("created collection 'users'")
     return
 }
@@ -88,7 +88,7 @@ export async function createThreadsCollection(db) {
         validationAction: "error",
     })
 
-    threadsCollection.createIndex({ title: 1 }, { unique: true })
+    await threadsCollection.createIndex({ title: 1 }, { unique: true })
     console.log("created collection 'threads'")
 
     return
