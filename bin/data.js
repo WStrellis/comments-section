@@ -1,6 +1,6 @@
 export const users = [{ name: "Leonard" }, { name: "Martha" }]
 
-export function createthreads(user1, user2) {
+export function createThreads(user1, user2) {
     return [
         {
             title: "The Perilous Life of a Chicken",

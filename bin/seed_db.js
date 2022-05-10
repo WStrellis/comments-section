@@ -1,4 +1,4 @@
-import { users, createthreads } from "./data.js"
+import { users, createThreads } from "./data.js"
 
 export async function seedCollections(db) {
     const usersCollection = db.collection("users")
@@ -14,7 +14,7 @@ export async function seedCollections(db) {
 
     const threadsCollection = db.collection("threads")
     //make thread array
-    const newThreads = createthreads(leonard, martha)
+    const newThreads = createThreads(leonard, martha)
     // add threads
     const threadResult = await threadsCollection.insertMany(newThreads)
     console.log("threadResult", threadResult)
