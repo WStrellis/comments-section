@@ -1,10 +1,10 @@
 type User {
-    id: ID!
+    _id: ID!
     name: String
 }
 
 type Thread {
-    id: ID!
+    _id: ID!
     title: String!
     comments: [Comment]!
 }
