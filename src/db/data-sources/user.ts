@@ -8,7 +8,8 @@ export default class UsersCollection extends MongoDataSource<User> {
     return this.findOneById(userId)
   }
 
-  getUsers(): Promise< User[] | null | undefined >{
-    return this.collection.find()
+  async getUsers(): Promise< User[] | null | undefined >{
+    const res = await this.collection.find()
+    return res.toArray()
   }
 }

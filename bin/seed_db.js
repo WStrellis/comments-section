@@ -11,6 +11,8 @@ export async function seedCollections(db) {
     const leonard = ids["0"]
     const martha = ids["1"]
     console.log("userResult", ids)
+    // const res = await usersCollection.find()
+    // console.log(res)
 
     const threadsCollection = db.collection("threads")
     //make thread array
