@@ -11,11 +11,12 @@ import { GraphQLSchema } from "graphql"
 import { loadSchemaSync } from "@graphql-tools/load"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
 
-import {MongoClient} from 'mongodb'
+import { MongoClient } from "mongodb"
 
-import type {Resolvers} from './types/index'
+import type { Resolvers } from "./types/index"
+import UsersCollection from "./db/data-sources/usersCollection"
 
-import dotenv from 'dotenv'
+import dotenv from "dotenv"
 
 dotenv.config()
 
@@ -26,13 +27,16 @@ const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
 const PORT = Number(process.env.HTTP_PORT) || 3000
 const MONGO_HOST = process.env.MONGO_HOST || "localhost"
 const MONGO_PORT = process.env.MONGO_PORT || "27017"
+const MONGO_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME
+const MONGO_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD
 
-const resolvers : Resolvers = {
+const resolvers: Resolvers = {
     Mutation,
-    Query
+    Query,
 }
 
-const mongoUri = `mongodb://${MONGO_HOST}:${MONGO_PORT}/comments-section`
+const mongoUri = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/comments-section?authMechanism=DEFAULT`
+
 const mongoClient = new MongoClient(mongoUri)
 mongoClient.connect()
 
@@ -48,9 +52,10 @@ async function startApollo(
         resolvers,
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
         dataSources: () => ({
-            users: 
-        })
-        
+            usersColl: new UsersCollection(
+                mongoClient.db().collection("users"),
+            ),
+        }),
     })
     await server.start()
     server.applyMiddleware({ app })
