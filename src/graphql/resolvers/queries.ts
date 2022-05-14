@@ -1,10 +1,6 @@
 import type { QueryUsersResponse } from "../../types/index"
 import type { User, QueryUsersResponseResolvers } from "../../types/index"
-
-function getErrorMessage(error: unknown) {
-    if (error instanceof Error) return error.message
-    return String(error)
-}
+import { getErrorMessage } from "../../util/errors"
 
 export default {
     users: async (
