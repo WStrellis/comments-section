@@ -26,8 +26,3 @@ export default {
         return res
     },
 }
-// {
-//             success: true,
-//             message: "ok",
-//             users: [...ctx.db.users],
-//         }

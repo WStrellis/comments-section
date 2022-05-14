@@ -27,8 +27,6 @@ const MONGO_HOST = process.env.MONGO_HOST || "localhost"
 const MONGO_PORT = process.env.MONGO_PORT || "27017"
 const MONGO_USERNAME = process.env.MONGO_USERNAME || ""
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD || ""
-console.log("username", MONGO_USERNAME)
-console.log("password", MONGO_PASSWORD)
 
 const mongoUri = `mongodb://${MONGO_HOST}:${MONGO_PORT}/comments-section`
 
