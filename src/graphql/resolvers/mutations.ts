@@ -21,12 +21,13 @@ export default {
             res.success = dbRes.acknowledged
 
             if (dbRes.acknowledged) {
-                const user: User = {
+
+                res.user = {
                     _id: dbRes.insertedId.toString(),
                     name,
                 }
-                res.user = user
                 res.message = "Created user " + name
+
             } else {
                 throw new Error(
                     `Could not create user: ${JSON.stringify(dbRes)}`,

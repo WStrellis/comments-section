@@ -1,23 +1,25 @@
+scalar ObjectID
+
 type User {
-    _id: ID
+    _id: ObjectID
     name: String
 }
 
 type Thread {
-    _id: ID
+    _id: ObjectID
     title: String!
     comments: [Comment]!
 }
 
 type Comment {
-    user: ID
+    user: ObjectID
     text: String!
     replies: [Reply]!
     timestamp: Int!
 }
 
 type Reply {
-    user: ID
+    user: ObjectID
     text: String!
     timestamp: Int!
 }
