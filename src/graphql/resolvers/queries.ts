@@ -1,3 +1,4 @@
+import UsersCollection from "../../db/data-sources/usersCollection"
 import type { QueryUsersResponse } from "../../types/index"
 import type { User, QueryUsersResponseResolvers } from "../../types/index"
 import { getErrorMessage } from "../../util/errors"
@@ -6,7 +7,7 @@ export default {
     users: async (
         parent: any,
         _: any,
-        { dataSources: { usersColl } }: any,
+        { dataSources: { usersClx } }: any,
     ): Promise<QueryUsersResponse> => {
         const users: User[] = []
         const res: QueryUsersResponse = {
@@ -16,7 +17,7 @@ export default {
         }
 
         try {
-            const dbUsers = await usersColl.getUsers()
+            const dbUsers = await usersClx.getUsers()
             res.message = `Found ${dbUsers.length} Users`
             res.users = dbUsers
         } catch (error: unknown) {

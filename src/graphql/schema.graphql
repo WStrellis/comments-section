@@ -1,23 +1,23 @@
 type User {
-    _id: ID!
+    _id: ID
     name: String
 }
 
 type Thread {
-    _id: ID!
+    _id: ID
     title: String!
     comments: [Comment]!
 }
 
 type Comment {
-    user: ID!
+    user: ID
     text: String!
     replies: [Reply]!
     timestamp: Int!
 }
 
 type Reply {
-    user: ID!
+    user: ID
     text: String!
     timestamp: Int!
 }

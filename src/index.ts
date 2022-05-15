@@ -61,7 +61,7 @@ async function startApollo(
         resolvers,
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
         dataSources: () => ({
-            usersColl: new UsersCollection(mongo.db().collection("users")),
+            usersClx: new UsersCollection(mongo.db().collection("users")),
         }),
     })
     await server.start()

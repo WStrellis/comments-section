@@ -34,7 +34,7 @@ export type Comment = {
     replies: Array<Maybe<Reply>>
     text: Scalars["String"]
     timestamp: Scalars["Int"]
-    user: Scalars["ID"]
+    user?: Maybe<Scalars["ID"]>
 }
 
 export type Mutation = {
@@ -72,7 +72,7 @@ export type Reply = {
     __typename?: "Reply"
     text: Scalars["String"]
     timestamp: Scalars["Int"]
-    user: Scalars["ID"]
+    user?: Maybe<Scalars["ID"]>
 }
 
 export type Response = {
@@ -82,14 +82,14 @@ export type Response = {
 
 export type Thread = {
     __typename?: "Thread"
-    _id: Scalars["ID"]
+    _id?: Maybe<Scalars["ID"]>
     comments: Array<Maybe<Comment>>
     title: Scalars["String"]
 }
 
 export type User = {
     __typename?: "User"
-    _id: Scalars["ID"]
+    _id?: Maybe<Scalars["ID"]>
     name?: Maybe<Scalars["String"]>
 }
 
@@ -257,7 +257,7 @@ export type CommentResolvers<
     >
     text?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     timestamp?: Resolver<ResolversTypes["Int"], ParentType, ContextType>
-    user?: Resolver<ResolversTypes["ID"], ParentType, ContextType>
+    user?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -316,7 +316,7 @@ export type ReplyResolvers<
 > = {
     text?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     timestamp?: Resolver<ResolversTypes["Int"], ParentType, ContextType>
-    user?: Resolver<ResolversTypes["ID"], ParentType, ContextType>
+    user?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -337,7 +337,7 @@ export type ThreadResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["Thread"] = ResolversParentTypes["Thread"],
 > = {
-    _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>
+    _id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>
     comments?: Resolver<
         Array<Maybe<ResolversTypes["Comment"]>>,
         ParentType,
@@ -351,7 +351,7 @@ export type UserResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["User"] = ResolversParentTypes["User"],
 > = {
-    _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>
+    _id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>
     name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
