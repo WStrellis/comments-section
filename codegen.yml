@@ -5,3 +5,6 @@ generates:
     plugins:
       - "@graphql-codegen/typescript"
       - "@graphql-codegen/typescript-resolvers"
+    config:
+      scalars:
+        ObjectID: string

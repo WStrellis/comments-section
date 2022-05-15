@@ -11,7 +11,9 @@ import Mutation from "./graphql/resolvers/mutations.js"
 import Query from "./graphql/resolvers/queries.js"
 import { GraphQLSchema } from "graphql"
 import { loadSchemaSync } from "@graphql-tools/load"
+import { mergeSchemas } from "@graphql-tools/schema"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
+import { ObjectIDTypeDefinition, ObjectIDResolver } from "graphql-scalars"
 
 import { MongoClient, AuthMechanism } from "mongodb"
 
@@ -30,15 +32,6 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD || ""
 
 const mongoUri = `mongodb://${MONGO_HOST}:${MONGO_PORT}/comments-section`
 
-const schema = loadSchemaSync(join("src", "graphql", "schema.graphql"), {
-    loaders: [new GraphQLFileLoader()],
-})
-
-const resolvers: Resolvers = {
-    Mutation,
-    Query,
-}
-
 async function connectMongo(): Promise<MongoClient> {
     const mongoClient = new MongoClient(mongoUri, {
         auth: { username: MONGO_USERNAME, password: MONGO_PASSWORD },
@@ -48,10 +41,9 @@ async function connectMongo(): Promise<MongoClient> {
     return mongoClient.connect()
 }
 
-// TODO: set correct parameter types
 async function startApollo(
     typeDefs: GraphQLSchema,
-    resolvers: any,
+    resolvers: Resolvers,
     mongo: MongoClient,
 ): Promise<void> {
     const app = express()
@@ -69,16 +61,36 @@ async function startApollo(
     httpServer.listen(PORT, () => console.log("App listening on port", PORT))
 }
 
-async function main(
-    resolvers: Resolvers,
-    schema: GraphQLSchema,
-): Promise<void> {
+async function main(): Promise<void> {
     try {
+        // Create schema
+        const baseSchema = loadSchemaSync(
+            join("src", "graphql", "schema.graphql"),
+            {
+                loaders: [new GraphQLFileLoader()],
+            },
+        )
+
+        const mergedSchema = mergeSchemas({
+            schemas: [baseSchema],
+            typeDefs: ObjectIDTypeDefinition,
+        })
+
+        // add resolvers
+        const resolvers: Resolvers = {
+            Mutation,
+            Query,
+            ObjectID: ObjectIDResolver,
+        }
+
+        // connect to db
         const mongoClient = await connectMongo()
-        startApollo(schema, resolvers, mongoClient)
+
+        // start server
+        startApollo(mergedSchema, resolvers, mongoClient)
     } catch (error: unknown) {
         console.error(getErrorMessage(error))
     }
 }
 
-main(resolvers, schema)
+main()

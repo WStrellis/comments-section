@@ -31,7 +31,8 @@
     "apollo-server-express": "^3.6.7",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "graphql": "^16.3.0"
+    "graphql": "^16.3.0",
+    "graphql-scalars": "^1.17.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
