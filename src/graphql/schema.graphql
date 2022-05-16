@@ -42,8 +42,8 @@ type QueryUsersResponse implements Response {
 }
 
 type Query {
-    thread(id: ID!): Thread
-    user(id: ID!): User
+    thread(id: ObjectID!): Thread
+    user(id: ObjectID!): User
     users: QueryUsersResponse!
 }
 
