@@ -35,15 +35,34 @@ type AddUserResponse implements Response {
     user: User
 }
 
+type QueryUserResponse implements Response {
+    success: Boolean!
+    message: String!
+    user: User!
+}
+
 type QueryUsersResponse implements Response {
     success: Boolean!
     message: String!
     users: [User]!
 }
 
+type QueryThreadsResponse implements Response {
+    success: Boolean!
+    message: String!
+    threads: [Thread]!
+}
+
+type QueryThreadResponse implements Response {
+    success: Boolean!
+    message: String!
+    thread: Thread!
+}
+
 type Query {
-    thread(id: ObjectID!): Thread
-    user(id: ObjectID!): User
+    threads: QueryThreadsResponse!
+    thread(id: ObjectID!): QueryThreadResponse!
+    user(id: ObjectID!): QueryUserResponse!
     users: QueryUsersResponse!
 }
 

@@ -19,6 +19,7 @@ import { MongoClient, AuthMechanism } from "mongodb"
 
 import type { Resolvers } from "./types/index"
 import UsersCollection from "./db/data-sources/usersCollection"
+import ThreadsCollection from "./db/data-sources/threadsCollection"
 
 import dotenv from "dotenv"
 
@@ -54,6 +55,7 @@ async function startApollo(
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
         dataSources: () => ({
             usersClx: new UsersCollection(mongo.db().collection("users")),
+            threadsClx: new ThreadsCollection(mongo.db().collection("threads")),
         }),
     })
     await server.start()

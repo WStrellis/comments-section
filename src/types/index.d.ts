@@ -42,8 +42,9 @@ export type MutationAddUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  thread?: Maybe<Thread>;
-  user?: Maybe<User>;
+  thread: QueryThreadResponse;
+  threads: QueryThreadsResponse;
+  user: QueryUserResponse;
   users: QueryUsersResponse;
 };
 
@@ -55,6 +56,27 @@ export type QueryThreadArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ObjectID'];
+};
+
+export type QueryThreadResponse = Response & {
+  __typename?: 'QueryThreadResponse';
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+  thread: Thread;
+};
+
+export type QueryThreadsResponse = Response & {
+  __typename?: 'QueryThreadsResponse';
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+  threads: Array<Maybe<Thread>>;
+};
+
+export type QueryUserResponse = Response & {
+  __typename?: 'QueryUserResponse';
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+  user: User;
 };
 
 export type QueryUsersResponse = Response & {
@@ -165,9 +187,12 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
   Query: ResolverTypeWrapper<{}>;
+  QueryThreadResponse: ResolverTypeWrapper<QueryThreadResponse>;
+  QueryThreadsResponse: ResolverTypeWrapper<QueryThreadsResponse>;
+  QueryUserResponse: ResolverTypeWrapper<QueryUserResponse>;
   QueryUsersResponse: ResolverTypeWrapper<QueryUsersResponse>;
   Reply: ResolverTypeWrapper<Reply>;
-  Response: ResolversTypes['AddUserResponse'] | ResolversTypes['QueryUsersResponse'];
+  Response: ResolversTypes['AddUserResponse'] | ResolversTypes['QueryThreadResponse'] | ResolversTypes['QueryThreadsResponse'] | ResolversTypes['QueryUserResponse'] | ResolversTypes['QueryUsersResponse'];
   String: ResolverTypeWrapper<Scalars['String']>;
   Thread: ResolverTypeWrapper<Thread>;
   User: ResolverTypeWrapper<User>;
@@ -182,9 +207,12 @@ export type ResolversParentTypes = {
   Mutation: {};
   ObjectID: Scalars['ObjectID'];
   Query: {};
+  QueryThreadResponse: QueryThreadResponse;
+  QueryThreadsResponse: QueryThreadsResponse;
+  QueryUserResponse: QueryUserResponse;
   QueryUsersResponse: QueryUsersResponse;
   Reply: Reply;
-  Response: ResolversParentTypes['AddUserResponse'] | ResolversParentTypes['QueryUsersResponse'];
+  Response: ResolversParentTypes['AddUserResponse'] | ResolversParentTypes['QueryThreadResponse'] | ResolversParentTypes['QueryThreadsResponse'] | ResolversParentTypes['QueryUserResponse'] | ResolversParentTypes['QueryUsersResponse'];
   String: Scalars['String'];
   Thread: Thread;
   User: User;
@@ -214,9 +242,31 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  thread?: Resolver<Maybe<ResolversTypes['Thread']>, ParentType, ContextType, RequireFields<QueryThreadArgs, 'id'>>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+  thread?: Resolver<ResolversTypes['QueryThreadResponse'], ParentType, ContextType, RequireFields<QueryThreadArgs, 'id'>>;
+  threads?: Resolver<ResolversTypes['QueryThreadsResponse'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['QueryUserResponse'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   users?: Resolver<ResolversTypes['QueryUsersResponse'], ParentType, ContextType>;
+};
+
+export type QueryThreadResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['QueryThreadResponse'] = ResolversParentTypes['QueryThreadResponse']> = {
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  thread?: Resolver<ResolversTypes['Thread'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QueryThreadsResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['QueryThreadsResponse'] = ResolversParentTypes['QueryThreadsResponse']> = {
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  threads?: Resolver<Array<Maybe<ResolversTypes['Thread']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QueryUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['QueryUserResponse'] = ResolversParentTypes['QueryUserResponse']> = {
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryUsersResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['QueryUsersResponse'] = ResolversParentTypes['QueryUsersResponse']> = {
@@ -234,7 +284,7 @@ export type ReplyResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['Response'] = ResolversParentTypes['Response']> = {
-  __resolveType: TypeResolveFn<'AddUserResponse' | 'QueryUsersResponse', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'AddUserResponse' | 'QueryThreadResponse' | 'QueryThreadsResponse' | 'QueryUserResponse' | 'QueryUsersResponse', ParentType, ContextType>;
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
@@ -258,6 +308,9 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   ObjectID?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
+  QueryThreadResponse?: QueryThreadResponseResolvers<ContextType>;
+  QueryThreadsResponse?: QueryThreadsResponseResolvers<ContextType>;
+  QueryUserResponse?: QueryUserResponseResolvers<ContextType>;
   QueryUsersResponse?: QueryUsersResponseResolvers<ContextType>;
   Reply?: ReplyResolvers<ContextType>;
   Response?: ResponseResolvers<ContextType>;
