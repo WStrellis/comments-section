@@ -9,6 +9,7 @@ type User {
 type Thread {
     _id: ObjectID
     title: String!
+    created: Timestamp!
     comments: [Comment]!
 }
 
