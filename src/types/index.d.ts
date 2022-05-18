@@ -112,6 +112,7 @@ export type Thread = {
     __typename?: "Thread"
     _id?: Maybe<Scalars["ObjectID"]>
     comments: Array<Maybe<Comment>>
+    created: Scalars["Timestamp"]
     title: Scalars["String"]
 }
 
@@ -431,6 +432,7 @@ export type ThreadResolvers<
         ParentType,
         ContextType
     >
+    created?: Resolver<ResolversTypes["Timestamp"], ParentType, ContextType>
     title?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }

@@ -4,6 +4,7 @@ export function createThreads(user1, user2) {
     return [
         {
             title: "The Perilous Life of a Chicken",
+            created: new Date(),
             comments: [
                 {
                     user: user2,
@@ -27,6 +28,7 @@ export function createThreads(user1, user2) {
         },
         {
             title: "Vacuuming For Beginners",
+            created: new Date(),
             comments: [
                 {
                     user: user2,

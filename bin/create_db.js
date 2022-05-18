@@ -30,7 +30,8 @@ export async function createThreadsCollection(db) {
         validator: {
             $jsonSchema: {
                 bsonType: "object",
-                required: ["title", "comments"],
+                additionalProperties: false,
+                required: ["title", "comments", "created"],
                 properties: {
                     _id: {},
                     title: {
@@ -38,6 +39,9 @@ export async function createThreadsCollection(db) {
                         minLength: 3,
                         maxLength: 30,
                         description: "title of the thread",
+                    },
+                    created: {
+                        bsonType: "date",
                     },
                     comments: {
                         bsonType: ["array"],
