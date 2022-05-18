@@ -1,4 +1,5 @@
 scalar ObjectID
+scalar Timestamp
 
 type User {
     _id: ObjectID
@@ -15,13 +16,13 @@ type Comment {
     user: ObjectID
     text: String!
     replies: [Reply]!
-    timestamp: Int!
+    timestamp: Timestamp!
 }
 
 type Reply {
     user: ObjectID
     text: String!
-    timestamp: Int!
+    timestamp: Timestamp!
 }
 
 interface Response {

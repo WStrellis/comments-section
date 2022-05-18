@@ -1,4 +1,7 @@
-import type { QueryUsersResponse, QueryThreadsResponse } from "../../types/index"
+import type {
+    QueryUsersResponse,
+    QueryThreadsResponse,
+} from "../../types/index"
 import type { User, Thread } from "../../types/index"
 import { getErrorMessage } from "../../util/errors"
 
@@ -39,7 +42,6 @@ export default {
 
         try {
             const dbThreads = await threadsClx.getThreads()
-            console.log("dbThreads",dbThreads)
             res.message = `Found ${dbThreads.length} threads`
             res.threads = dbThreads
         } catch (error: unknown) {
@@ -47,5 +49,5 @@ export default {
             res.message = getErrorMessage(error)
         }
         return res
-    }
+    },
 }
