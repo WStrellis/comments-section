@@ -30,9 +30,9 @@ export type Scalars = {
 
 export type AddUserResponse = Response & {
     __typename?: "AddUserResponse"
+    data?: Maybe<User>
     message: Scalars["String"]
     success: Scalars["Boolean"]
-    user?: Maybe<User>
 }
 
 export type Comment = {
@@ -43,13 +43,25 @@ export type Comment = {
     user?: Maybe<Scalars["ObjectID"]>
 }
 
+export type CreateThreadResponse = Response & {
+    __typename?: "CreateThreadResponse"
+    data?: Maybe<Thread>
+    message: Scalars["String"]
+    success: Scalars["Boolean"]
+}
+
 export type Mutation = {
     __typename?: "Mutation"
     addUser: AddUserResponse
+    createThread: CreateThreadResponse
 }
 
 export type MutationAddUserArgs = {
     name: Scalars["String"]
+}
+
+export type MutationCreateThreadArgs = {
+    title: Scalars["String"]
 }
 
 export type Query = {
@@ -70,30 +82,30 @@ export type QueryUserArgs = {
 
 export type QueryThreadResponse = Response & {
     __typename?: "QueryThreadResponse"
+    data?: Maybe<Thread>
     message: Scalars["String"]
     success: Scalars["Boolean"]
-    thread: Thread
 }
 
 export type QueryThreadsResponse = Response & {
     __typename?: "QueryThreadsResponse"
+    data: Array<Maybe<Thread>>
     message: Scalars["String"]
     success: Scalars["Boolean"]
-    threads: Array<Maybe<Thread>>
 }
 
 export type QueryUserResponse = Response & {
     __typename?: "QueryUserResponse"
+    data?: Maybe<User>
     message: Scalars["String"]
     success: Scalars["Boolean"]
-    user: User
 }
 
 export type QueryUsersResponse = Response & {
     __typename?: "QueryUsersResponse"
+    data: Array<Maybe<User>>
     message: Scalars["String"]
     success: Scalars["Boolean"]
-    users: Array<Maybe<User>>
 }
 
 export type Reply = {
@@ -232,6 +244,7 @@ export type ResolversTypes = {
     AddUserResponse: ResolverTypeWrapper<AddUserResponse>
     Boolean: ResolverTypeWrapper<Scalars["Boolean"]>
     Comment: ResolverTypeWrapper<Comment>
+    CreateThreadResponse: ResolverTypeWrapper<CreateThreadResponse>
     Mutation: ResolverTypeWrapper<{}>
     ObjectID: ResolverTypeWrapper<Scalars["ObjectID"]>
     Query: ResolverTypeWrapper<{}>
@@ -242,6 +255,7 @@ export type ResolversTypes = {
     Reply: ResolverTypeWrapper<Reply>
     Response:
         | ResolversTypes["AddUserResponse"]
+        | ResolversTypes["CreateThreadResponse"]
         | ResolversTypes["QueryThreadResponse"]
         | ResolversTypes["QueryThreadsResponse"]
         | ResolversTypes["QueryUserResponse"]
@@ -257,6 +271,7 @@ export type ResolversParentTypes = {
     AddUserResponse: AddUserResponse
     Boolean: Scalars["Boolean"]
     Comment: Comment
+    CreateThreadResponse: CreateThreadResponse
     Mutation: {}
     ObjectID: Scalars["ObjectID"]
     Query: {}
@@ -267,6 +282,7 @@ export type ResolversParentTypes = {
     Reply: Reply
     Response:
         | ResolversParentTypes["AddUserResponse"]
+        | ResolversParentTypes["CreateThreadResponse"]
         | ResolversParentTypes["QueryThreadResponse"]
         | ResolversParentTypes["QueryThreadsResponse"]
         | ResolversParentTypes["QueryUserResponse"]
@@ -281,9 +297,9 @@ export type AddUserResponseResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["AddUserResponse"] = ResolversParentTypes["AddUserResponse"],
 > = {
+    data?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>
     message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
-    user?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -302,6 +318,16 @@ export type CommentResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
+export type CreateThreadResponseResolvers<
+    ContextType = any,
+    ParentType extends ResolversParentTypes["CreateThreadResponse"] = ResolversParentTypes["CreateThreadResponse"],
+> = {
+    data?: Resolver<Maybe<ResolversTypes["Thread"]>, ParentType, ContextType>
+    message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
+    success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
 export type MutationResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
@@ -311,6 +337,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationAddUserArgs, "name">
+    >
+    createThread?: Resolver<
+        ResolversTypes["CreateThreadResponse"],
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateThreadArgs, "title">
     >
 }
 
@@ -351,9 +383,9 @@ export type QueryThreadResponseResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["QueryThreadResponse"] = ResolversParentTypes["QueryThreadResponse"],
 > = {
+    data?: Resolver<Maybe<ResolversTypes["Thread"]>, ParentType, ContextType>
     message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
-    thread?: Resolver<ResolversTypes["Thread"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -361,13 +393,13 @@ export type QueryThreadsResponseResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["QueryThreadsResponse"] = ResolversParentTypes["QueryThreadsResponse"],
 > = {
-    message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
-    success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
-    threads?: Resolver<
+    data?: Resolver<
         Array<Maybe<ResolversTypes["Thread"]>>,
         ParentType,
         ContextType
     >
+    message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
+    success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -375,9 +407,9 @@ export type QueryUserResponseResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["QueryUserResponse"] = ResolversParentTypes["QueryUserResponse"],
 > = {
+    data?: Resolver<Maybe<ResolversTypes["User"]>, ParentType, ContextType>
     message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
-    user?: Resolver<ResolversTypes["User"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -385,13 +417,13 @@ export type QueryUsersResponseResolvers<
     ContextType = any,
     ParentType extends ResolversParentTypes["QueryUsersResponse"] = ResolversParentTypes["QueryUsersResponse"],
 > = {
-    message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
-    success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
-    users?: Resolver<
+    data?: Resolver<
         Array<Maybe<ResolversTypes["User"]>>,
         ParentType,
         ContextType
     >
+    message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
+    success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
@@ -411,6 +443,7 @@ export type ResponseResolvers<
 > = {
     __resolveType: TypeResolveFn<
         | "AddUserResponse"
+        | "CreateThreadResponse"
         | "QueryThreadResponse"
         | "QueryThreadsResponse"
         | "QueryUserResponse"
@@ -454,6 +487,7 @@ export type UserResolvers<
 export type Resolvers<ContextType = any> = {
     AddUserResponse?: AddUserResponseResolvers<ContextType>
     Comment?: CommentResolvers<ContextType>
+    CreateThreadResponse?: CreateThreadResponseResolvers<ContextType>
     Mutation?: MutationResolvers<ContextType>
     ObjectID?: GraphQLScalarType
     Query?: QueryResolvers<ContextType>

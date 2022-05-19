@@ -15,13 +15,13 @@ export default {
         const res: QueryUsersResponse = {
             success: true,
             message: "",
-            users,
+            data: users,
         }
 
         try {
             const dbUsers = await usersClx.getUsers()
             res.message = `Found ${dbUsers.length} Users`
-            res.users = dbUsers
+            res.data = dbUsers
         } catch (error: unknown) {
             res.success = false
             res.message = getErrorMessage(error)
@@ -37,13 +37,13 @@ export default {
         const res: QueryThreadsResponse = {
             success: true,
             message: "",
-            threads,
+            data: threads,
         }
 
         try {
             const dbThreads = await threadsClx.getThreads()
             res.message = `Found ${dbThreads.length} threads`
-            res.threads = dbThreads
+            res.data = dbThreads
         } catch (error: unknown) {
             res.success = false
             res.message = getErrorMessage(error)

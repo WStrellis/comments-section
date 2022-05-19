@@ -34,31 +34,37 @@ interface Response {
 type AddUserResponse implements Response {
     success: Boolean!
     message: String!
-    user: User
+    data: User
 }
 
 type QueryUserResponse implements Response {
     success: Boolean!
     message: String!
-    user: User!
+    data: User
 }
 
 type QueryUsersResponse implements Response {
     success: Boolean!
     message: String!
-    users: [User]!
+    data: [User]!
 }
 
 type QueryThreadsResponse implements Response {
     success: Boolean!
     message: String!
-    threads: [Thread]!
+    data: [Thread]!
 }
 
 type QueryThreadResponse implements Response {
     success: Boolean!
     message: String!
-    thread: Thread!
+    data: Thread
+}
+
+type CreateThreadResponse implements Response {
+    success: Boolean!
+    message: String!
+    data: Thread
 }
 
 type Query {
@@ -70,4 +76,5 @@ type Query {
 
 type Mutation {
     addUser(name: String!): AddUserResponse!
+    createThread(title: String!): CreateThreadResponse!
 }
