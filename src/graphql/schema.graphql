@@ -1,5 +1,5 @@
 scalar ObjectID
-scalar Timestamp
+scalar DateTime
 
 type User {
     _id: ObjectID
@@ -9,7 +9,7 @@ type User {
 type Thread {
     _id: ObjectID
     title: String!
-    created: Timestamp!
+    created: DateTime!
     comments: [Comment]!
 }
 
@@ -17,13 +17,13 @@ type Comment {
     user: ObjectID
     text: String!
     replies: [Reply]!
-    timestamp: Timestamp!
+    timestamp: DateTime!
 }
 
 type Reply {
     user: ObjectID
     text: String!
-    timestamp: Timestamp!
+    timestamp: DateTime!
 }
 
 interface Response {

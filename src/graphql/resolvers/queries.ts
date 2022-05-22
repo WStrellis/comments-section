@@ -1,6 +1,7 @@
 import type {
     QueryUsersResponse,
     QueryThreadsResponse,
+    QueryThreadResponse,
 } from "../../types/index"
 import type { User, Thread } from "../../types/index"
 import { getErrorMessage } from "../../util/errors"
@@ -44,7 +45,28 @@ export default {
             const dbThreads = await threadsClx.getThreads()
             res.message = `Found ${dbThreads.length} threads`
             res.data = dbThreads
-        } catch (error: unknown) {
+        } catch (error) {
+            res.success = false
+            res.message = getErrorMessage(error)
+        }
+        return res
+    },
+    thread: async (
+        parent: any,
+        { id }: { id: string },
+        { dataSources: { threadsClx } }: any,
+    ): Promise<QueryThreadResponse> => {
+        const res: QueryThreadResponse = {
+            success: true,
+            message: "",
+            data: undefined,
+        }
+
+        try {
+            const dbThread : Thread = await threadsClx.getThread(id)
+            res.message = `Found thread ${dbThread?._id?.toString()}`
+            res.data = dbThread
+        } catch (error) {
             res.success = false
             res.message = getErrorMessage(error)
         }
