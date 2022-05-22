@@ -1,7 +1,6 @@
 import { MongoDataSource } from "apollo-datasource-mongodb"
-import type { Thread } from "../../types"
+import type { Thread, Comment } from "../../types"
 import { ObjectId } from "mongodb"
-import type { TimeLike } from "fs"
 
 export default class ThreadsCollection extends MongoDataSource<Thread> {
     getThread(threadId: string) {
@@ -19,5 +18,12 @@ export default class ThreadsCollection extends MongoDataSource<Thread> {
             created: new Date().toISOString(),
             comments: [],
         })
+    }
+    updateComments(threadId: string, comments: Comment[]): Promise<any> {
+        return this.collection.updateOne(
+            // @ts-expect-error
+            { _id: new ObjectId(threadId) },
+            { $set: { comments } },
+        )
     }
 }
