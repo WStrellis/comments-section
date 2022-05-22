@@ -1,5 +1,13 @@
-import type { AddUserResponse, CreateThreadResponse } from "../../types/index"
-import { type InsertOneResult } from "mongodb"
+import {
+    type UserResponse,
+    type ThreadResponse,
+    type Comment,
+    type Thread,
+    type CommentResponse,
+    ActionType,
+} from "../../types/index.js"
+
+import { type InsertOneResult, UpdateResult, ObjectId } from "mongodb"
 import { getErrorMessage } from "../../util/errors"
 
 export default {
@@ -7,9 +15,10 @@ export default {
         _: any,
         { name }: { name: string },
         ctx: any,
-    ): Promise<AddUserResponse> => {
+    ): Promise<UserResponse> => {
         // add user
-        const res: AddUserResponse = {
+        const res: UserResponse = {
+            action: ActionType.Create,
             success: true,
             message: "",
             data: undefined,
@@ -41,14 +50,14 @@ export default {
         _: any,
         { title }: { title: string },
         ctx: any,
-    ): Promise<CreateThreadResponse> => {
-        // add user
-        const res: CreateThreadResponse = {
+    ): Promise<ThreadResponse> => {
+        const res: ThreadResponse = {
+            action: ActionType.Create,
             success: true,
             message: "",
             data: undefined,
         }
-        // let createdOK = false
+
         try {
             const insertRes: InsertOneResult =
                 await ctx.dataSources.threadsClx.createThread(title)
@@ -65,6 +74,71 @@ export default {
             )
             res.data = thread
             res.message = "Created thread " + title
+        } catch (error) {
+            res.message = getErrorMessage(error)
+            res.success = false
+        }
+        return res
+    },
+    createComment: async (
+        _: any,
+        {
+            threadId,
+            user,
+            text,
+        }: { threadId: string; user: string; text: string },
+        ctx: any,
+    ): Promise<CommentResponse> => {
+        const res: CommentResponse = {
+            action: ActionType.Create,
+            success: true,
+            message: "",
+            threadId,
+            data: undefined,
+        }
+
+        try {
+            // fetch thread
+            const thread: Thread = await ctx.dataSources.threadsClx.getThread(
+                threadId,
+            )
+            if (!thread) {
+                throw new Error(
+                    `Could not fetch thread data. DB reponse: ${JSON.stringify(
+                        thread,
+                    )}`,
+                )
+            }
+
+            // create comment
+            const comment: Comment = {
+                // @ts-expect-error
+                user: new ObjectId(user),
+                text,
+                timestamp: new Date().toISOString(),
+                replies: [],
+            }
+
+            // append new comment
+            const { comments } = thread
+            comments.push(comment)
+
+            // update thread
+            const updateRes: UpdateResult =
+                await ctx.dataSources.threadsClx.updateComments(
+                    threadId,
+                    comments,
+                )
+            console.log("updateRes", updateRes)
+
+            if (!updateRes.acknowledged) {
+                throw new Error(
+                    `Could not create comment: ${JSON.stringify(updateRes)}`,
+                )
+            }
+
+            res.data = comment
+            res.message = "Created comment"
         } catch (error) {
             res.message = getErrorMessage(error)
             res.success = false

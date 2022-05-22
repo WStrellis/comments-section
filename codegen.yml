@@ -1,11 +1,11 @@
 ---
 schema: "./src/graphql/schema.graphql"
 generates:
-  src/types/index.d.ts:
+  src/types/index.ts:
     plugins:
       - "@graphql-codegen/typescript"
       - "@graphql-codegen/typescript-resolvers"
     config:
       scalars:
         ObjectID: string
-        Timestamp: number
+        DateTime: string

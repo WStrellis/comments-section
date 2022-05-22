@@ -1,8 +1,9 @@
-import type {
-    QueryUsersResponse,
-    QueryThreadsResponse,
-    QueryThreadResponse,
-} from "../../types/index"
+import {
+    type UsersResponse,
+    type ThreadsResponse,
+    type ThreadResponse,
+    ActionType,
+} from "../../types/index.js"
 import type { User, Thread } from "../../types/index"
 import { getErrorMessage } from "../../util/errors"
 
@@ -11,9 +12,10 @@ export default {
         parent: any,
         _: any,
         { dataSources: { usersClx } }: any,
-    ): Promise<QueryUsersResponse> => {
+    ): Promise<UsersResponse> => {
         const users: User[] = []
-        const res: QueryUsersResponse = {
+        const res: UsersResponse = {
+            action: ActionType.Read,
             success: true,
             message: "",
             data: users,
@@ -33,9 +35,10 @@ export default {
         parent: any,
         _: any,
         { dataSources: { threadsClx } }: any,
-    ): Promise<QueryThreadsResponse> => {
+    ): Promise<ThreadsResponse> => {
         const threads: Thread[] = []
-        const res: QueryThreadsResponse = {
+        const res: ThreadsResponse = {
+            action: ActionType.Read,
             success: true,
             message: "",
             data: threads,
@@ -55,15 +58,16 @@ export default {
         parent: any,
         { id }: { id: string },
         { dataSources: { threadsClx } }: any,
-    ): Promise<QueryThreadResponse> => {
-        const res: QueryThreadResponse = {
+    ): Promise<ThreadResponse> => {
+        const res: ThreadResponse = {
+            action: ActionType.Read,
             success: true,
             message: "",
             data: undefined,
         }
 
         try {
-            const dbThread : Thread = await threadsClx.getThread(id)
+            const dbThread: Thread = await threadsClx.getThread(id)
             res.message = `Found thread ${dbThread?._id?.toString()}`
             res.data = dbThread
         } catch (error) {

@@ -26,55 +26,76 @@ type Reply {
     timestamp: DateTime!
 }
 
+enum ActionType {
+    READ
+    CREATE
+    UPDATE
+    DELETE
+}
+
 interface Response {
+    action: ActionType!
     success: Boolean!
     message: String!
 }
 
-type AddUserResponse implements Response {
-    success: Boolean!
-    message: String!
-    data: User
-}
-
-type QueryUserResponse implements Response {
+type UserResponse implements Response {
+    action: ActionType!
     success: Boolean!
     message: String!
     data: User
 }
 
-type QueryUsersResponse implements Response {
+type UsersResponse implements Response {
+    action: ActionType!
     success: Boolean!
     message: String!
     data: [User]!
 }
 
-type QueryThreadsResponse implements Response {
+type ThreadResponse implements Response {
+    action: ActionType!
+    success: Boolean!
+    message: String!
+    data: Thread
+}
+
+type ThreadsResponse implements Response {
+    action: ActionType!
     success: Boolean!
     message: String!
     data: [Thread]!
 }
 
-type QueryThreadResponse implements Response {
+type CommentResponse implements Response {
+    action: ActionType!
     success: Boolean!
     message: String!
-    data: Thread
+    threadId: String!
+    data: Comment
 }
 
-type CreateThreadResponse implements Response {
+type CommentsResponse implements Response {
+    action: ActionType!
     success: Boolean!
     message: String!
-    data: Thread
+    threadId: String!
+    data: [Comment]!
 }
 
 type Query {
-    threads: QueryThreadsResponse!
-    thread(id: ObjectID!): QueryThreadResponse!
-    user(id: ObjectID!): QueryUserResponse!
-    users: QueryUsersResponse!
+    threads: ThreadsResponse!
+    thread(id: ObjectID!): ThreadResponse!
+    user(id: ObjectID!): UserResponse!
+    users: UsersResponse!
 }
 
 type Mutation {
-    addUser(name: String!): AddUserResponse!
-    createThread(title: String!): CreateThreadResponse!
+    addUser(name: String!): UserResponse!
+    createThread(title: String!): ThreadResponse!
+    createComment(
+        threadId: String!
+        user: ObjectID!
+        text: String!
+    ): CommentResponse!
 }
