@@ -53,7 +53,6 @@ export default {
             const insertRes: InsertOneResult =
                 await ctx.dataSources.threadsClx.createThread(title)
 
-            // createdOK = insertRes.acknowledged
             if (!insertRes.acknowledged) {
                 throw new Error(
                     `Could not create thread: ${JSON.stringify(insertRes)}`,

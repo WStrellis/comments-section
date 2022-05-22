@@ -24,8 +24,8 @@ export type Scalars = {
     Boolean: boolean
     Int: number
     Float: number
+    DateTime: any
     ObjectID: string
-    Timestamp: number
 }
 
 export type AddUserResponse = Response & {
@@ -39,7 +39,7 @@ export type Comment = {
     __typename?: "Comment"
     replies: Array<Maybe<Reply>>
     text: Scalars["String"]
-    timestamp: Scalars["Timestamp"]
+    timestamp: Scalars["DateTime"]
     user?: Maybe<Scalars["ObjectID"]>
 }
 
@@ -111,7 +111,7 @@ export type QueryUsersResponse = Response & {
 export type Reply = {
     __typename?: "Reply"
     text: Scalars["String"]
-    timestamp: Scalars["Timestamp"]
+    timestamp: Scalars["DateTime"]
     user?: Maybe<Scalars["ObjectID"]>
 }
 
@@ -124,7 +124,7 @@ export type Thread = {
     __typename?: "Thread"
     _id?: Maybe<Scalars["ObjectID"]>
     comments: Array<Maybe<Comment>>
-    created: Scalars["Timestamp"]
+    created: Scalars["DateTime"]
     title: Scalars["String"]
 }
 
@@ -245,6 +245,7 @@ export type ResolversTypes = {
     Boolean: ResolverTypeWrapper<Scalars["Boolean"]>
     Comment: ResolverTypeWrapper<Comment>
     CreateThreadResponse: ResolverTypeWrapper<CreateThreadResponse>
+    DateTime: ResolverTypeWrapper<Scalars["DateTime"]>
     Mutation: ResolverTypeWrapper<{}>
     ObjectID: ResolverTypeWrapper<Scalars["ObjectID"]>
     Query: ResolverTypeWrapper<{}>
@@ -262,7 +263,6 @@ export type ResolversTypes = {
         | ResolversTypes["QueryUsersResponse"]
     String: ResolverTypeWrapper<Scalars["String"]>
     Thread: ResolverTypeWrapper<Thread>
-    Timestamp: ResolverTypeWrapper<Scalars["Timestamp"]>
     User: ResolverTypeWrapper<User>
 }
 
@@ -272,6 +272,7 @@ export type ResolversParentTypes = {
     Boolean: Scalars["Boolean"]
     Comment: Comment
     CreateThreadResponse: CreateThreadResponse
+    DateTime: Scalars["DateTime"]
     Mutation: {}
     ObjectID: Scalars["ObjectID"]
     Query: {}
@@ -289,7 +290,6 @@ export type ResolversParentTypes = {
         | ResolversParentTypes["QueryUsersResponse"]
     String: Scalars["String"]
     Thread: Thread
-    Timestamp: Scalars["Timestamp"]
     User: User
 }
 
@@ -313,7 +313,7 @@ export type CommentResolvers<
         ContextType
     >
     text?: Resolver<ResolversTypes["String"], ParentType, ContextType>
-    timestamp?: Resolver<ResolversTypes["Timestamp"], ParentType, ContextType>
+    timestamp?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>
     user?: Resolver<Maybe<ResolversTypes["ObjectID"]>, ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
@@ -326,6 +326,11 @@ export type CreateThreadResponseResolvers<
     message?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     success?: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
+}
+
+export interface DateTimeScalarConfig
+    extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+    name: "DateTime"
 }
 
 export type MutationResolvers<
@@ -432,7 +437,7 @@ export type ReplyResolvers<
     ParentType extends ResolversParentTypes["Reply"] = ResolversParentTypes["Reply"],
 > = {
     text?: Resolver<ResolversTypes["String"], ParentType, ContextType>
-    timestamp?: Resolver<ResolversTypes["Timestamp"], ParentType, ContextType>
+    timestamp?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>
     user?: Resolver<Maybe<ResolversTypes["ObjectID"]>, ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
@@ -465,14 +470,9 @@ export type ThreadResolvers<
         ParentType,
         ContextType
     >
-    created?: Resolver<ResolversTypes["Timestamp"], ParentType, ContextType>
+    created?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>
     title?: Resolver<ResolversTypes["String"], ParentType, ContextType>
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
-}
-
-export interface TimestampScalarConfig
-    extends GraphQLScalarTypeConfig<ResolversTypes["Timestamp"], any> {
-    name: "Timestamp"
 }
 
 export type UserResolvers<
@@ -488,6 +488,7 @@ export type Resolvers<ContextType = any> = {
     AddUserResponse?: AddUserResponseResolvers<ContextType>
     Comment?: CommentResolvers<ContextType>
     CreateThreadResponse?: CreateThreadResponseResolvers<ContextType>
+    DateTime?: GraphQLScalarType
     Mutation?: MutationResolvers<ContextType>
     ObjectID?: GraphQLScalarType
     Query?: QueryResolvers<ContextType>
@@ -498,6 +499,5 @@ export type Resolvers<ContextType = any> = {
     Reply?: ReplyResolvers<ContextType>
     Response?: ResponseResolvers<ContextType>
     Thread?: ThreadResolvers<ContextType>
-    Timestamp?: GraphQLScalarType
     User?: UserResolvers<ContextType>
 }

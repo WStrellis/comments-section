@@ -16,8 +16,8 @@ import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
 import {
     ObjectIDTypeDefinition,
     ObjectIDResolver,
-    TimestampTypeDefinition,
-    TimestampResolver,
+    DateTimeTypeDefinition,
+    DateTimeResolver,
 } from "graphql-scalars"
 
 import { MongoClient, AuthMechanism } from "mongodb"
@@ -80,7 +80,7 @@ async function main(): Promise<void> {
 
         const mergedSchema = mergeSchemas({
             schemas: [baseSchema],
-            typeDefs: [ObjectIDTypeDefinition, TimestampTypeDefinition],
+            typeDefs: [ObjectIDTypeDefinition, DateTimeTypeDefinition],
         })
 
         // add resolvers
@@ -88,7 +88,7 @@ async function main(): Promise<void> {
             Mutation,
             Query,
             ObjectID: ObjectIDResolver,
-            Timestamp: TimestampResolver,
+            DateTime: DateTimeResolver,
         }
 
         // connect to db

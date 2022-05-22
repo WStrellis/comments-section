@@ -41,7 +41,7 @@ export async function createThreadsCollection(db) {
                         description: "title of the thread",
                     },
                     created: {
-                        bsonType: "date",
+                        bsonType: "string",
                     },
                     comments: {
                         bsonType: ["array"],
@@ -59,7 +59,7 @@ export async function createThreadsCollection(db) {
                                     bsonType: "string",
                                 },
                                 timestamp: {
-                                    bsonType: "date",
+                                    bsonType: "string",
                                 },
                                 replies: {
                                     bsonType: ["array"],
@@ -78,7 +78,7 @@ export async function createThreadsCollection(db) {
                                                 bsonType: "string",
                                             },
                                             timestamp: {
-                                                bsonType: "date",
+                                                bsonType: "string",
                                             },
                                         },
                                     },
