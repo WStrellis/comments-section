@@ -145,4 +145,71 @@ export default {
         }
         return res
     },
+    /*createReply: async (
+        _: any,
+        {
+            threadId,
+            commentIdx,
+            user,
+            text,
+        }: { threadId: string;commentIdx:number, user: string; text: string },
+        ctx: any,
+    ): Promise<CommentResponse> => {
+        const res: CommentResponse = {
+            action: ActionType.Create,
+            success: true,
+            message: "",
+            threadId,
+            data: undefined,
+        }
+
+        try {
+            // fetch thread
+            const thread: Thread = await ctx.dataSources.threadsClx.getThread(
+                threadId,
+            )
+            if (!thread) {
+                throw new Error(
+                    `Could not fetch thread data. DB reponse: ${JSON.stringify(
+                        thread,
+                    )}`,
+                )
+            }
+
+            // create comment
+            const comment: Comment = {
+                // @ts-expect-error
+                user: new ObjectId(user),
+                text,
+                timestamp: new Date().toISOString(),
+                replies: [],
+            }
+
+            // append new comment
+            const { comments } = thread
+            comments.push(comment)
+
+            // update thread
+            const updateRes: UpdateResult =
+                await ctx.dataSources.threadsClx.updateComments(
+                    threadId,
+                    comments,
+                )
+            console.log("updateRes", updateRes)
+
+            if (!updateRes.acknowledged) {
+                throw new Error(
+                    `Could not create comment: ${JSON.stringify(updateRes)}`,
+                )
+            }
+
+            res.data = comment
+            res.message = "Created comment"
+        } catch (error) {
+            res.message = getErrorMessage(error)
+            res.success = false
+        }
+        return res
+    },
+*/
 }

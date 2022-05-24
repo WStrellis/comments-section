@@ -83,6 +83,23 @@ type CommentsResponse implements Response {
     data: [Comment]!
 }
 
+type ReplyResponse implements Response {
+    action: ActionType!
+    success: Boolean!
+    message: String!
+    threadId: String!
+    commentIndex: Int!
+    data: Reply
+}
+
+type RepliesResponse implements Response {
+    action: ActionType!
+    success: Boolean!
+    message: String!
+    threadId: String!
+    commentIndex: Int!
+    data: [Reply]!
+}
 type Query {
     threads: ThreadsResponse!
     thread(id: ObjectID!): ThreadResponse!
@@ -98,4 +115,10 @@ type Mutation {
         user: ObjectID!
         text: String!
     ): CommentResponse!
+    createReply(
+        threadId: String!
+        commentIdx: Int!
+        user: ObjectID!
+        text: String!
+    ): ReplyResponse!
 }

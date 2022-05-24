@@ -1,5 +1,5 @@
 import { MongoDataSource } from "apollo-datasource-mongodb"
-import type { Thread, Comment } from "../../types"
+import type { Thread, Comment, Reply } from "../../types"
 import { ObjectId } from "mongodb"
 
 export default class ThreadsCollection extends MongoDataSource<Thread> {
@@ -19,11 +19,20 @@ export default class ThreadsCollection extends MongoDataSource<Thread> {
             comments: [],
         })
     }
-    updateComments(threadId: string, comments: Comment[]): Promise<any> {
+    updateComments(threadId: string, comments: Comment[]) {
         return this.collection.updateOne(
             // @ts-expect-error
             { _id: new ObjectId(threadId) },
             { $set: { comments } },
+        )
+    }
+
+    addReply(threadId:string, commentIdx: number, reply: Reply) {
+        const targetComment = `comments.${commentIdx}.replies`
+        return this.collection.updateOne(
+            // @ts-expect-error
+            { _id: new ObjectId(threadId) },
+            { $push: { targetComment : reply } },
         )
     }
 }
