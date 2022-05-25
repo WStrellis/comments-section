@@ -174,7 +174,7 @@ export default {
                 text,
                 timestamp: new Date().toISOString(),
             }
-            console.log("new reply", reply)
+
             // update thread
             const updateRes: UpdateResult =
                 await ctx.dataSources.threadsClx.addReply(
@@ -182,7 +182,6 @@ export default {
                     commentIdx,
                     reply,
                 )
-            console.log("addReply response:", updateRes)
 
             if (!updateRes.acknowledged) {
                 throw new Error(
