@@ -4,6 +4,8 @@ import {
     type Comment,
     type Thread,
     type CommentResponse,
+    type ReplyResponse,
+    type Reply,
     ActionType,
 } from "../../types/index.js"
 
@@ -145,57 +147,42 @@ export default {
         }
         return res
     },
-    /*createReply: async (
+    createReply: async (
         _: any,
         {
             threadId,
             commentIdx,
             user,
             text,
-        }: { threadId: string;commentIdx:number, user: string; text: string },
+        }: { threadId: string; commentIdx: number; user: string; text: string },
         ctx: any,
-    ): Promise<CommentResponse> => {
-        const res: CommentResponse = {
+    ): Promise<ReplyResponse> => {
+        const res: ReplyResponse = {
             action: ActionType.Create,
             success: true,
             message: "",
             threadId,
+            commentIndex: commentIdx,
             data: undefined,
         }
 
         try {
-            // fetch thread
-            const thread: Thread = await ctx.dataSources.threadsClx.getThread(
-                threadId,
-            )
-            if (!thread) {
-                throw new Error(
-                    `Could not fetch thread data. DB reponse: ${JSON.stringify(
-                        thread,
-                    )}`,
-                )
-            }
-
             // create comment
-            const comment: Comment = {
+            const reply: Reply = {
                 // @ts-expect-error
                 user: new ObjectId(user),
                 text,
                 timestamp: new Date().toISOString(),
-                replies: [],
             }
-
-            // append new comment
-            const { comments } = thread
-            comments.push(comment)
-
+            console.log("new reply", reply)
             // update thread
             const updateRes: UpdateResult =
-                await ctx.dataSources.threadsClx.updateComments(
+                await ctx.dataSources.threadsClx.addReply(
                     threadId,
-                    comments,
+                    commentIdx,
+                    reply,
                 )
-            console.log("updateRes", updateRes)
+            console.log("addReply response:", updateRes)
 
             if (!updateRes.acknowledged) {
                 throw new Error(
@@ -203,13 +190,12 @@ export default {
                 )
             }
 
-            res.data = comment
-            res.message = "Created comment"
+            res.data = reply
+            res.message = "Created reply"
         } catch (error) {
             res.message = getErrorMessage(error)
             res.success = false
         }
         return res
     },
-*/
 }

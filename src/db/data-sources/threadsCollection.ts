@@ -27,12 +27,14 @@ export default class ThreadsCollection extends MongoDataSource<Thread> {
         )
     }
 
-    addReply(threadId:string, commentIdx: number, reply: Reply) {
-        const targetComment = `comments.${commentIdx}.replies`
+    addReply(threadId: string, commentIdx: number, reply: Reply) {
+        const targetComment: string = `comments.${commentIdx}.replies`
+        const arg = { targetComment: reply }
+        console.log("arg", arg)
         return this.collection.updateOne(
             // @ts-expect-error
             { _id: new ObjectId(threadId) },
-            { $push: { targetComment : reply } },
+            { $push: arg },
         )
     }
 }
