@@ -27,6 +27,14 @@ export default class ThreadsCollection extends MongoDataSource<Thread> {
         )
     }
 
+    addComment(threadId: string, comment: Comment) {
+        return this.collection.updateOne(
+            // @ts-expect-error
+            { _id: new ObjectId(threadId) },
+            { $push: { comments: comment } },
+        )
+    }
+
     addReply(threadId: string, commentIdx: number, reply: Reply) {
         return this.collection.updateOne(
             // @ts-expect-error
