@@ -100,18 +100,6 @@ export default {
         }
 
         try {
-            // fetch thread
-            const thread: Thread = await ctx.dataSources.threadsClx.getThread(
-                threadId,
-            )
-            if (!thread) {
-                throw new Error(
-                    `Could not fetch thread data. DB reponse: ${JSON.stringify(
-                        thread,
-                    )}`,
-                )
-            }
-
             // create comment
             const comment: Comment = {
                 // @ts-expect-error
@@ -121,17 +109,9 @@ export default {
                 replies: [],
             }
 
-            // append new comment
-            const { comments } = thread
-            comments.push(comment)
-
             // update thread
             const updateRes: UpdateResult =
-                await ctx.dataSources.threadsClx.updateComments(
-                    threadId,
-                    comments,
-                )
-            console.log("updateRes", updateRes)
+                await ctx.dataSources.threadsClx.addComment(threadId, comment)
 
             if (!updateRes.acknowledged) {
                 throw new Error(
