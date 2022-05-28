@@ -7,7 +7,7 @@ import {
     type ReplyResponse,
     type Reply,
     ActionType,
-} from "../../types/index.js"
+} from "../../types/gql.js"
 
 import { type InsertOneResult, UpdateResult, ObjectId } from "mongodb"
 import { getErrorMessage } from "../../util/errors"

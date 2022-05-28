@@ -2,9 +2,10 @@ import {
     type UsersResponse,
     type ThreadsResponse,
     type ThreadResponse,
+    type User,
+    type Thread,
     ActionType,
-} from "../../types/index.js"
-import type { User, Thread } from "../../types/index"
+} from "../../types/gql.js"
 import { getErrorMessage } from "../../util/errors"
 
 export default {

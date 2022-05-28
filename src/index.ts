@@ -22,7 +22,7 @@ import {
 
 import { MongoClient, AuthMechanism } from "mongodb"
 
-import type { Resolvers } from "./types/index"
+import type { Resolvers } from "./types/gql.js"
 import UsersCollection from "./db/data-sources/usersCollection"
 import ThreadsCollection from "./db/data-sources/threadsCollection"
 

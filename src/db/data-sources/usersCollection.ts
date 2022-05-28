@@ -1,5 +1,5 @@
 import { MongoDataSource } from "apollo-datasource-mongodb"
-import type { User } from "../../types"
+import type { User } from "../../types/gql.js"
 import type { InsertOneResult } from "mongodb"
 
 export default class UsersCollection extends MongoDataSource<User> {

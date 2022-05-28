@@ -1,5 +1,5 @@
 import { MongoDataSource } from "apollo-datasource-mongodb"
-import type { Thread, Comment, Reply } from "../../types"
+import type { Thread, Comment, Reply } from "../../types/gql.js"
 import { ObjectId } from "mongodb"
 
 export default class ThreadsCollection extends MongoDataSource<Thread> {
