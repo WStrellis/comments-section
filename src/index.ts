@@ -9,7 +9,7 @@ import { getErrorMessage } from "./util/errors.js"
 
 import Mutation from "./graphql/resolvers/mutations.js"
 import Query from "./graphql/resolvers/queries.js"
-import { GraphQLSchema } from "graphql"
+import { GraphQLSchema, __InputValue } from "graphql"
 import { loadSchemaSync } from "@graphql-tools/load"
 import { mergeSchemas } from "@graphql-tools/schema"
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader"
@@ -38,6 +38,7 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD || ""
 
 const mongoUri = `mongodb://${MONGO_HOST}:${MONGO_PORT}/comments-section`
 
+
 async function connectMongo(): Promise<MongoClient> {
     const mongoClient = new MongoClient(mongoUri, {
         auth: { username: MONGO_USERNAME, password: MONGO_PASSWORD },
@@ -63,6 +64,9 @@ async function startApollo(
             threadsClx: new ThreadsCollection(mongo.db().collection("threads")),
         }),
     })
+
+    app.use("/app",express.static("client"))
+
     await server.start()
     server.applyMiddleware({ app })
     httpServer.listen(PORT, () => console.log("App listening on port", PORT))
